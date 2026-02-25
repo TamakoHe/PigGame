@@ -1,5 +1,8 @@
 {
   "buildCommand": null,
   "outputDirectory": ".",
-  "framework": null
+  "framework": null,
+  "redirects": [
+    { "source": "/piggame", "destination": "/piggame/", "permanent": true }
+  ]
 }
