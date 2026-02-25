@@ -1,0 +1,178 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+  background: #f5f0e8;
+  color: #333;
+}
+
+.header {
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  background: #e8dfd0;
+  border-bottom: 2px solid #ccc;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.header-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.score-wrap,
+.timer-wrap,
+.miss-wrap {
+  font-weight: bold;
+}
+
+.timer-wrap { color: #0a5; }
+.miss-wrap { color: #c33; }
+
+.start-screen {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  background: rgba(245, 240, 232, 0.98);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.start-screen.hidden {
+  display: none;
+}
+
+.start-screen h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.start-hint {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.difficulty-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.difficulty-options label {
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-start {
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+  background: #c99;
+  border: 1px solid #a77;
+  border-radius: 4px;
+}
+
+.btn-start:hover {
+  background: #daa;
+}
+
+.game-area {
+  flex: 1;
+  position: relative;
+  min-height: 280px;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  background: #fff;
+  touch-action: none;
+  overflow: hidden;
+}
+
+.pig-wrap {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.pig-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.trail-svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.trail-svg line,
+.trail-svg polyline {
+  stroke: rgba(80, 80, 80, 0.8);
+  stroke-width: 4;
+  stroke-linecap: round;
+  fill: none;
+}
+
+.trail-svg.hidden line,
+.trail-svg.hidden polyline {
+  display: none;
+}
+
+.footer {
+  padding: 0.5rem 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #666;
+  background: #e8dfd0;
+  border-top: 1px solid #ccc;
+}
+
+.footer p {
+  margin: 0;
+}
+
+@media (min-width: 500px) {
+  .game-area {
+    min-height: 360px;
+  }
+
+  .pig-wrap {
+    width: 100px;
+    height: 100px;
+  }
+}
