@@ -322,20 +322,34 @@
   (function preloadImages() {
     var total = 2;
     var loaded = 0;
+    var done = false;
+    function showStartScreen() {
+      if (done) return;
+      done = true;
+      if (loadScreen) loadScreen.classList.add('hidden');
+      if (startScreen) startScreen.classList.remove('hidden');
+    }
     function onDone() {
       loaded += 1;
-      if (loaded >= total && loadScreen) {
-        loadScreen.classList.add('hidden');
-        if (startScreen) startScreen.classList.remove('hidden');
-      }
+      if (loaded >= total) showStartScreen();
     }
+    // 使用绝对 URL，避免移动端相对路径解析不一致导致预加载一直不完成
+    var baseEl = document.querySelector('base');
+    var path = location.pathname;
+    var baseUrl = (baseEl && baseEl.href)
+      ? baseEl.href.replace(/\/?$/, '/')
+      : (location.origin + (path === '/' || path === '' ? '/' : path.replace(/\/$/, '') + '/'));
     var img1 = new Image();
     img1.onload = onDone;
     img1.onerror = onDone;
-    img1.src = PIG_IMG_SRC;
+    img1.src = baseUrl + PIG_IMG_SRC;
     var img2 = new Image();
     img2.onload = onDone;
     img2.onerror = onDone;
-    img2.src = HIT_EFFECT_SRC;
+    img2.src = baseUrl + HIT_EFFECT_SRC;
+    // 移动端可能 onload/onerror 不触发（如请求挂起、解码慢），超时后强制进入
+    setTimeout(function () {
+      if (!done) showStartScreen();
+    }, 6000);
   })();
 })();
